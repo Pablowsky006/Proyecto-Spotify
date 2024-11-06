@@ -1,0 +1,35 @@
+//Esta clase es el centro de control de guardado de las canciones y los podcast, aqui se guardan los datos esenciales de las camnciones y los podcasts.
+
+
+
+
+public class Media {
+    
+    protected String nombre;
+    protected String artista;
+    protected String album;
+    protected int aniolanzamiento;
+    protected int tipo;
+    
+    
+    
+    public Media(String nombre, String artista, String album, int aniolanzamiento, int tipo)
+    {
+    this.nombre = nombre;
+    this.artista = artista;
+    this.album = album;
+    this.aniolanzamiento = aniolanzamiento;
+    this.tipo = tipo;
+    }
+    
+    public String getNombre() { return nombre;}
+    public String getArtista(){ return artista;}
+    public String getAlbum(){ return album;}
+    public int getTipo(){ return tipo;}
+    
+    
+    public String toString()
+    {
+    return nombre + " - " + artista + " (" + album + ", " + aniolanzamiento + ")";
+    }
+}
