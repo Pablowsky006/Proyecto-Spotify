@@ -1,0 +1,29 @@
+//En esta clase se  maneja todo lo relacionado a la informacion de las canciones
+aqui obtenemos los datos de la cancion y si en lagun momento el sistyema detecta que no es una informacion valida o que no es correcta no agregar nada a la lista de canciones.
+
+
+
+
+public class Cancion extends Media {
+    private String letra;
+    private String nombreArchivo;
+    private String genero;
+    
+    
+    public Cancion(String nombre, String artista, String album, int aniolanzamiento, String letra, String gnombreArchivo, String genero)
+    {
+    super(nombre, artista, album, aniolanzamiento, 2);
+    this.letra= letra;
+    this.nombreArchivo = nombreArchivo;
+    this.genero = genero;
+    }
+     public String getLetra() { return letra; }
+    public String getNombreArchivo() { return nombreArchivo; }
+    public String getGenero() { return genero; }
+//Aqui es donde validamos si el espacion para agregar esta vacio o no es una informacion valida
+    public boolean validar() {
+        return !nombre.isEmpty() && !artista.isEmpty() && !album.isEmpty() &&
+               aniolanzamiento > 0 && !letra.isEmpty() && !nombreArchivo.isEmpty();
+    }
+    
+}
