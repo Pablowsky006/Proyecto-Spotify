@@ -1,0 +1,23 @@
+// En este apartado se controla la informacion de los artistas de las diferentes canciones y podcast que se agregan en el reproductor
+
+public class Artista {
+    private String nombre;
+    private String generoMusical;
+    
+    
+    
+    public Artista (String nombre, String generoMusical)
+    {
+    this.nombre = nombre;
+    this.generoMusical = generoMusical;
+    }
+    
+    public String getNombre(){return nombre;}
+    public String getGeneroMusical(){return generoMusical;}
+    
+    
+    public String toString()
+    {
+     return nombre + " - " + generoMusical;
+    }
+}
