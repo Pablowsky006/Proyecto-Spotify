@@ -1,0 +1,25 @@
+package com.mycompany.proyectofinalspotify;
+
+import java.util.ArrayList;
+
+// Clase UsuarioAdmin que extiende la clase Usuario y representa a un administrador del sistema
+public class UsuarioAdmin extends Usuario {
+    
+    private ArrayList<Artista> artistas; // Lista de artistas que el administrador puede gestionar
+    
+    // Constructor de UsuarioAdmin, que recibe el nombre del administrador
+    public UsuarioAdmin(String nombre) {
+        super(nombre, true); // Llama al constructor de Usuario y establece el atributo de administrador en true
+        artistas = new ArrayList<>(); // Inicializa la lista de artistas
+    }
+    
+    // Método para agregar un nuevo artista a la lista
+    public void agregarArtista(String nombre, String generoMusical) {
+        artistas.add(new Artista(nombre, generoMusical)); // Crea un nuevo objeto Artista y lo añade a la lista
+    }
+    
+    // Método para obtener la lista de artistas gestionados por el administrador
+    public ArrayList<Artista> getArtistas() { 
+        return artistas; 
+    }
+}
