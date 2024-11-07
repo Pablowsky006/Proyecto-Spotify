@@ -1,0 +1,10 @@
+// Aqui se verifica si el usuario es gratuito
+
+
+
+public class UsuarioGratuito extends Usuario {
+    public UsuarioGratuito(String nombre)
+    {
+    super(nombre, false);
+    }
+}
