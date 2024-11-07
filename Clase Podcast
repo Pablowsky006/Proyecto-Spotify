@@ -1,0 +1,14 @@
+//Esta clase sirve para la gestion de los podcast, donde declaramos la duracion de los podcast para mostrarlos en pantalla.
+
+
+
+public class Podcast extends Media {
+    private int duracion;
+    public Podcast(String nombre, String artista, String album, int añoLanzamiento, int duracion) {
+//Se le pone 1 para diferenciarlo de las canciones que son tipo 2
+        super(nombre, artista, album, añoLanzamiento, 1); // tipo 1 para podcast
+        this.duracion = duracion;
+    }
+    
+    public int getDuracion(){return duracion;}
+}
