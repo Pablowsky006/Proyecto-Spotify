@@ -1,0 +1,104 @@
+package com.mycompany.proyectofinalspotify;
+
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+// Clase Reproductor para manejar la reproducción de audio
+public class Reproductor {
+    
+    private Clip clip; // Objeto Clip que maneja el audio
+    private AudioInputStream audioStream; // Flujo de entrada de audio
+    private long posicionPausada; // Posición de la canción al momento de pausarla
+    private List<String> canciones; // Lista de archivos de canciones
+    private String archivo; // Archivo actual de audio
+    private int indiceActual; // Índice de la canción actual en la lista
+    
+    // Constructor que inicializa la lista de canciones y carga la primera canción
+    public Reproductor(List<String> canciones) {
+        this.canciones = canciones;
+        this.indiceActual = 0; // Inicia con la primera canción
+        cargarCancion();
+    }
+
+    // Método privado para cargar la canción actual desde la lista
+    private void cargarCancion() {
+        try {
+            audioStream = AudioSystem.getAudioInputStream(new File(canciones.get(indiceActual))); // Carga el archivo de audio
+            clip = AudioSystem.getClip(); // Obtiene un nuevo Clip
+            clip.open(audioStream); // Abre el Clip con el flujo de audio
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            System.out.println("Error al cargar el archivo de audio: " + e.getMessage());
+        }
+    }
+
+    // Método para iniciar la reproducción de audio
+    public void reproducir() {
+        if (clip != null) {
+            clip.setMicrosecondPosition(posicionPausada); // Inicia desde la última posición pausada
+            clip.start(); // Comienza la reproducción
+        }
+    }
+
+    // Método para pausar la reproducción de audio
+    public void pausar() {
+        if (clip != null && clip.isRunning()) {
+            posicionPausada = clip.getMicrosecondPosition(); // Guarda la posición actual
+            clip.stop(); // Pausa la reproducción
+        }
+    }
+
+    // Método para reanudar la reproducción desde la posición pausada
+    public void reanudar() {
+        if (clip != null && !clip.isRunning()) {
+            reproducir(); // Reanuda la reproducción desde la posición pausada
+        }
+    }
+
+    // Método para detener la reproducción de audio
+    public void detener() {
+        if (clip != null) {
+            clip.stop(); // Detiene la reproducción
+            clip.setMicrosecondPosition(0); // Reinicia la posición a cero
+            posicionPausada = 0; // Resetea la posición pausada
+        }
+    }
+
+    // Método para reproducir la siguiente canción en la lista
+    public void siguiente() {
+        if (indiceActual < canciones.size() - 1) { // Verifica que no esté en la última canción
+            indiceActual++; // Incrementa el índice
+            cargarCancion(); // Carga la nueva canción
+            reproducir(); // Reproduce la canción
+        }
+    }
+
+    // Método para reproducir la canción anterior en la lista
+    public void anterior() {
+        if (indiceActual > 0) { // Verifica que no esté en la primera canción
+            indiceActual--; // Decrementa el índice
+            cargarCancion(); // Carga la nueva canción
+            reproducir(); // Reproduce la canción
+        }
+    }
+
+    // Método para liberar los recursos del reproductor y cerrar el flujo de audio
+    public void cerrar() {
+        if (clip != null) {
+            clip.close(); // Cierra el Clip
+        }
+        try {
+            if (audioStream != null) {
+                audioStream.close(); // Cierra el flujo de audio
+            }
+        } catch (IOException e) {
+            System.out.println("Error al cerrar el audio: " + e.getMessage());
+        }
+    }
+
+    
+    void setVisible(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+}
