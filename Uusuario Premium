@@ -1,0 +1,9 @@
+//En esta clase se manejan los usuarios premium
+
+
+public class UsuarioPremium extends Usuario {
+    public UsuarioPremium(String nombre)
+    {
+    super(nombre, true);
+    }
+}
