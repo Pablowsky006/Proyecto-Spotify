@@ -1,0 +1,116 @@
+package com.mycompany.proyectofinalspotify;
+
+import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
+
+// Clase principal que representa la interfaz gráfica del reproductor de audio
+public class ProyectofinalSpotify extends JFrame {
+    
+    private Reproductor reproductor; // Instancia de la clase Reproductor para manejar la reproducción de audio
+    private JButton botonReproducir; // Botón para reproducir audio
+    private JButton botonPausar; // Botón para pausar la reproducción
+    private JButton botonReanudar; // Botón para reanudar la reproducción pausada
+    private JButton botonDetener; // Botón para detener la reproducción
+    private JButton botonSiguiente; // Botón para avanzar a la siguiente canción
+    private JButton botonAnterior; // Botón para retroceder a la canción anterior
+
+    // Constructor de la clase que inicializa el reproductor con la lista de canciones y configura la interfaz
+    public ProyectofinalSpotify(List<String> canciones) {
+        reproductor = new Reproductor(canciones); // Inicializa el reproductor con la lista de canciones
+        initUI(); // Llama al método para configurar la interfaz
+    }
+
+    // Método para configurar la interfaz gráfica de usuario
+    private void initUI() {
+        setTitle("Reproductor de Audio WAV"); // Establece el título de la ventana
+        setSize(400, 300); // Define el tamaño de la ventana
+        setLayout(new FlowLayout()); // Usa un diseño de flujo para los componentes
+
+        // Inicialización de botones
+        botonReproducir = new JButton("Reproducir");
+        botonPausar = new JButton("Pausar");
+        botonReanudar = new JButton("Reanudar");
+        botonDetener = new JButton("Detener");
+        botonSiguiente = new JButton("Siguiente");
+        botonAnterior = new JButton("Anterior");
+
+        // Agrega los botones a la ventana
+        add(botonReproducir);
+        add(botonPausar);
+        add(botonReanudar);
+        add(botonDetener);
+        add(botonSiguiente);
+        add(botonAnterior);
+
+        // Agrega acción al botón "Reproducir"
+        botonReproducir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reproductor.reproducir(); // Llama al método reproducir del reproductor
+            }
+        });
+
+        // Agrega acción al botón "Pausar"
+        botonPausar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reproductor.pausar(); // Llama al método pausar del reproductor
+            }
+        });
+
+        // Agrega acción al botón "Reanudar"
+        botonReanudar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reproductor.reanudar(); // Llama al método reanudar del reproductor
+            }
+        });
+
+        // Agrega acción al botón "Detener"
+        botonDetener.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reproductor.detener(); // Llama al método detener del reproductor
+            }
+        });
+
+        // Agrega acción al botón "Siguiente"
+        botonSiguiente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reproductor.siguiente(); // Llama al método siguiente del reproductor
+            }
+        });
+
+        // Agrega acción al botón "Anterior"
+        botonAnterior.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                reproductor.anterior(); // Llama al método anterior del reproductor
+            }
+        });
+
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // Configura la operación al cerrar la ventana
+    }
+
+    // Método principal para iniciar la aplicación
+    public static void main(String[] args) {
+        // Lista de canciones a reproducir
+        List<String> canciones = Arrays.asList(
+            "C:\\Users\\USUARIO\\Downloads\\y2mate.com-Soda-Stereo-Cuando-Pase-el-Temblor-Official-Video_1.wav",
+            "C:\\Users\\USUARIO\\Downloads\\y2mate.com-Till-There-Was-You-Remastered-2009.wav",
+            "C:/ruta/del/tercer/archivo.wav"
+        );
+
+        // Ejecuta la interfaz en el hilo de eventos de Swing
+        SwingUtilities.invokeLater(() -> {
+            ProyectofinalSpotify ventana = new ProyectofinalSpotify(canciones); // Crea una instancia de la interfaz
+            ventana.setVisible(true); // Hace visible la ventana
+        });
+    }
+}
